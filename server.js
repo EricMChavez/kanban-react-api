@@ -25,14 +25,14 @@ var port = process.env.PORT || 3001;
 
 app.use('/', router);
 
-router.post('/card', function(req, res) {
+router.post('/cards', function(req, res) {
 	cards.push(req.body);
 	res.send('message resceved');
 });
-router.get('/card/:card_id', function(req, res) {
+router.get('/cards/:card_id', function(req, res) {
 	res.send(cards.find((card) => card.id == req.params.card_id));
 });
-router.put('/card/:card_id', function(req, res) {
+router.put('/cards/:card_id', function(req, res) {
 	let update = cards.find((card) => card.id == req.params.card_id);
 	update.color = req.body.color || update.color;
 	update.body = req.body.body || update.body;
