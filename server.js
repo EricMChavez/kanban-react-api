@@ -26,15 +26,19 @@ var port = process.env.PORT || 3001;
 app.use('/', router);
 
 router.post('/cards', function(req, res) {
-	cards.push(req.body);
-	res.send('message resceved');
+	let newCard = { id: req.body.id, title: req.body.title, content: null };
+	cards.push(newCard);
+
+	let updateLane = swimlanes.find((lane) => lane.id == req.body.lane);
+	updateLane.cards.push(req.body.id);
+
+	res.send(newCard);
 });
 router.get('/cards/:card_id', function(req, res) {
 	res.send(cards.find((card) => card.id == req.params.card_id));
 });
 router.put('/cards/:card_id', function(req, res) {
 	let update = cards.find((card) => card.id == req.params.card_id);
-	update.color = req.body.color || update.color;
 	update.body = req.body.body || update.body;
 	update.title = req.body.title || update.title;
 });
