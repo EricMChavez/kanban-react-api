@@ -43,7 +43,7 @@ router.put('/cards/:card_id', function(req, res) {
 	update.title = req.body.title || update.title;
 });
 
-router.post('/swimlane', function(req, res) {
+router.post('/swimlanes', function(req, res) {
 	swimlanes.push(req.body);
 	res.send('message resceved');
 });
